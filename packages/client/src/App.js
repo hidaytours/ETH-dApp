@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
+import { TextArea, Button } from 'ui-neumorphism'
+import 'ui-neumorphism/dist/index.css'
+
 import './App.css';
 
 import { getWavePortalContract } from './utils/getWaveContract';
+import { WalletButton } from './WalletButton';
 
 const App = () => {
   // ユーザのパブリックウォレットを保存する状態変数を定義
@@ -131,41 +135,41 @@ const App = () => {
           WELCOME!
         </div>
         <div className="bio">
-          イーサリアムウォレットを接続して、メッセージを作成したら、
+          Once you've connected your Ethereum wallet, wave
           <span role="img" aria-label="hand-wave">
             👋
           </span>
-          を送ってください
+          and send me a message!
           <span role="img" aria-label="shine">
             ✨
           </span>
         </div>
 
-        {/* Wallet Connect Button */}
-        {currentAccount?
-          (<button className="waveButton" onClick={connectWallet}>
-            Wallet Connected
-          </button>):
-          (<button className="waveButton" onClick={connectWallet}>
-            Connect Wallet
-          </button>)}
         
-        {currentAccount && (<button className="waveButton" onClick={wave}>
-          Wave at Me
-        </button>)}
         {currentAccount && (
-          <textarea
+          <TextArea
             name="messageArea"
             placeholder="Message here!"
             type="text"
             id="message"
+            width="600"
+            height="100"
+            style={{
+              "box-sizing": "border-box",
+              width: "100%",
+              margin: "0",
+              marginTop:"20px"
+            }}
             value={messageValue}
-            onChange={(e) => setMessageValue(e.target.value)}
+            onChange={(e) => {setMessageValue(e.value)}}
           />
-        )}
+          )}
+          {currentAccount && (<Button block color='#ccc' bgColor='var(--primary)' onClick={wave}>
+            Wave👋 & Send message
+          </Button>)}
         {currentAccount && (
           allWaves
-            .slice(0)
+          .slice(0)
             .reverse()
             .map((wave, index) => {
               return (
@@ -183,6 +187,8 @@ const App = () => {
               );
             })
         )}
+      {}
+      <WalletButton account={currentAccount} handleClick={connectWallet}/>
       </div>
     </div>
   );

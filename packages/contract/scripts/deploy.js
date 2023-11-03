@@ -6,6 +6,7 @@
 // global scope, and execute the script.
 const hre = require("hardhat");
 
+<<<<<<< HEAD
 async function main() {
   const currentTimestampInSeconds = Math.round(Date.now() / 1000);
   const unlockTime = currentTimestampInSeconds + 60;
@@ -31,3 +32,29 @@ main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
+=======
+const main = async () => {
+  const [deployer] = await hre.ethers.getSigners();
+  const accountBalance = await deployer.getBalance();
+  const waveContractFactory = await hre.ethers.getContractFactory("WavePortal");
+  const waveContract = await waveContractFactory.deploy({
+    value: hre.ethers.utils.parseEther("0.001"),
+  });
+  await waveContract.deployed();
+
+  console.log("Deploying contracts with account: ", deployer.address);
+  console.log("Account balance: ", accountBalance.toString());
+  console.log("WavePortal address: ", waveContract.address);
+};
+const runMain = async () => {
+  try {
+    await main();
+    process.exit(0);
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
+};
+
+runMain();
+>>>>>>> 48eadc68f548ce61b759d9b3a63307be0ef6ce91

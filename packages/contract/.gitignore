@@ -8,4 +8,8 @@ typechain-types
 # Hardhat files
 cache
 artifacts
+<<<<<<< HEAD
 
+=======
+hardhat.config.js
+>>>>>>> 48eadc68f548ce61b759d9b3a63307be0ef6ce91

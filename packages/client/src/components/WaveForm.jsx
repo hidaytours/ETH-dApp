@@ -48,7 +48,7 @@ export const WaveForm = () => {
         onChange={(e) => {setTextValue(e.value)}}
       />
       <Button block color='#ccc' bgColor='var(--primary)' onClick={wave}>
-        Wave👋 & Send message
+        <span class="material-symbols-outlined">send</span> Send wave👋 with message
       </Button>
     </>
   )
